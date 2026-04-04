@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Meme Sorter | Interactive Sorting Visualizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ============ LANDING PAGE ============ -->
+  <div class="landing" id="landing">
+    <div class="landing__bg-memes" id="landing-bg-memes"></div>
+    <div class="landing__content">
+      <div class="landing__wordmark">
+        <span class="landing__icon">🧩</span>
+        <span class="landing__brand">Meme Sorter</span>
+      </div>
+      <div class="landing__sequence">
+        <span class="landing__word landing__ready" id="word-ready">Ready</span>
+        <span class="landing__word landing__set" id="word-set">Set</span>
+      </div>
+      <button class="landing__go" id="btn-go">
+        <span class="landing__go-text">GO!</span>
+        <span class="landing__go-ring"></span>
+        <span class="landing__go-ring landing__go-ring--2"></span>
+      </button>
+      <p class="landing__hint">Click GO to enter the arena</p>
+    </div>
+    <div class="landing__splash" id="meme-splash"></div>
+  </div>
+
+  <div class="noise"></div>
+  <div class="mesh mesh--1"></div>
+  <div class="mesh mesh--2"></div>
+  <div class="mesh mesh--3"></div>
+
+  <div class="app" id="app" style="display:none">
+    <header class="header">
+      <p class="header__tag">✦ INTERACTIVE VISUALIZER</p>
+      <h1 class="header__title">Multi-Meme Sorter</h1>
+      <p class="header__sub">Watch algorithms race to reassemble a meme — one swap at a time.</p>
+    </header>
+
+    <div class="main-content">
+      <div class="stage-column">
+        <div class="stage-border" id="stage-border">
+          <div class="stage" id="stage">
+            <div class="stage__overlay" id="stage-overlay">
+              <div class="stage__loader" id="stage-loader"><div class="spinner"></div><span>Loading…</span></div>
+            </div>
+            <div class="stage__shimmer" id="stage-shimmer"></div>
+          </div>
+        </div>
+        <div class="stage__indices" id="stage-indices"></div>
+      </div>
+
+      <div class="algo-panel card" id="algo-panel">
+        <div class="algo-tabs">
+          <button class="algo-tab active" data-tab="code" id="tab-code"><span class="tab-icon">⟨/⟩</span> Code</button>
+          <button class="algo-tab" data-tab="flowchart" id="tab-flowchart"><span class="tab-icon">◆</span> Flow</button>
+        </div>
+        <div class="tab-body" id="code-content"><div class="code-block" id="code-block"></div></div>
+        <div class="tab-body" id="flowchart-content" style="display:none"><div class="flowchart" id="flowchart"></div></div>
+      </div>
+    </div>
+
+    <section class="controls card" id="controls">
+      <div class="controls__row">
+        <div class="ctrl-group">
+          <label class="ctrl-label" for="algorithm-select">Algorithm</label>
+          <select class="ctrl-select" id="algorithm-select">
+            <option value="bubble">Bubble Sort</option>
+            <option value="selection">Selection Sort</option>
+            <option value="insertion">Insertion Sort</option>
+            <option value="merge">Merge Sort</option>
+            <option value="quick">Quick Sort</option>
+          </select>
+        </div>
+        <div class="ctrl-group ctrl-buttons">
+          <button class="btn btn-accent" id="btn-scramble">Scramble</button>
+          <button class="btn btn-ghost" id="btn-step" disabled>Step</button>
+          <button class="btn btn-primary" id="btn-play" disabled><span id="play-label">Play</span></button>
+          <button class="btn btn-icon" id="btn-mute" title="Toggle sound">🔊</button>
+        </div>
+      </div>
+      <div class="controls__row controls__row--slider">
+        <label class="ctrl-label">Speed</label>
+        <input class="slider" type="range" id="speed-slider" min="20" max="600" value="200" step="10">
+        <span class="slider-val" id="speed-value">200 ms</span>
+      </div>
+    </section>
+
+    <section class="info card" id="info-panel">
+      <div class="info__top">
+        <span class="badge" id="algo-name">Bubble Sort</span>
+        <div class="metrics">
+          <div class="metric"><span class="metric-k">Time</span><span class="metric-v" id="time-complexity">O(n²)</span></div>
+          <div class="metric"><span class="metric-k">Space</span><span class="metric-v" id="space-complexity">O(1)</span></div>
+          <div class="metric"><span class="metric-k">Comps</span><span class="metric-v" id="comparison-count">0</span></div>
+          <div class="metric"><span class="metric-k">Swaps</span><span class="metric-v" id="swap-count">0</span></div>
+        </div>
+      </div>
+      <div class="state-bar"><span class="state-dot"></span><span class="state-text" id="state-text">Ready — click Scramble to begin.</span></div>
+    </section>
+  </div>
+
+  <!-- Celebration -->
+  <div class="celeb" id="celebration">
+    <div class="confetti-box" id="confetti"></div>
+    <div class="celeb-card card">
+      <video class="celeb-vid" id="celebration-video" autoplay loop playsinline></video>
+      <img class="celeb-img" id="celebration-meme" alt="" style="display:none">
+      <h2 class="celeb-title">Sorted! 🎉</h2>
+      <p class="celeb-stats" id="celebration-stats"></p>
+      <button class="btn btn-primary" id="btn-dismiss">Continue</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
